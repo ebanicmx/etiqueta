@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Envío - Datos de Etiqueta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; }
+        .bg-blue-gradient { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+        .modal-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+
+    <div class="w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
+        
+        <div class="bg-blue-gradient px-8 py-8 text-white text-center">
+            <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg mb-4">
+                <span class="text-black text-5xl font-black italic">B</span>
+            </div>
+            
+            <h1 class="text-2xl md:text-3xl font-extrabold mb-1 tracking-tight">eBanic Outlet men Multimarcas</h1>
+            <h2 class="text-lg font-medium opacity-90 mt-1">Datos de Tu Envío</h2>
+            <p id="refDisplay" class="text-white font-mono bg-white/20 inline-block px-4 py-1 rounded-full text-sm mt-3 border border-white/30"></p>
+        </div>
+        
+        <form id="shippingForm" class="p-8 space-y-5">
+            <input type="hidden" id="referenceNumber">
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Nombre Completo</label>
+                <input type="text" id="fullName" required placeholder="Ej. Juan Pérez López" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="col-span-2 md:col-span-1">
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Calle</label>
+                    <input type="text" id="street" required placeholder="Av. Reforma" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Número</label>
+                    <input type="text" id="number" required placeholder="123" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">C. Postal</label>
+                    <input type="text" id="zipCode" required placeholder="44100" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Colonia</label>
+                    <input type="text" id="neighborhood" required placeholder="Centro" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Ciudad</label>
+                    <input type="text" id="city" required placeholder="Guadalajara" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Estado</label>
+                    <input type="text" id="state" required placeholder="Jalisco" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Lada + Número de Celular (Obligatorio)</label>
+                <input type="tel" id="phone" required placeholder="Ej. 52 33 1234 5678" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Referencias del Domicilio</label>
+                <textarea id="references" rows="2" required placeholder="Fachada color verde, portón negro..." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Ubicación exacta (Google Maps)</label>
+                <input type="url" id="googleMaps" required placeholder="Pega aquí el enlace de Google Maps" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            
+            <button type="submit" class="w-full bg-slate-800 text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-900 active:scale-95 transition-all">
+                Enviar Información
+            </button>
+        </form>
+    </div>
+
+    <div id="infoModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden modal-fade-in">
+        <div class="bg-white rounded-3xl w-full max-w-md p-8 shadow-2xl border border-slate-100">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Información de Envío</h2>
+            </div>
+            <div class="text-slate-600 text-sm space-y-4 mb-6 leading-relaxed text-center">
+                <p>El costo de la guía es de <strong class="text-slate-800">$99.00 MXN</strong> para toda la República Mexicana.</p>
+                <p>Tu paquete será enviado a través de <strong>Estafeta</strong> con un tiempo estimado de entrega de <strong>4 a 6 días hábiles</strong>.</p>
+            </div>
+            <button id="closeInfoBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        const ref = 'REF-' + Math.floor(10000 + Math.random() * 90000);
+        document.getElementById('refDisplay').textContent = ref;
+        document.getElementById('referenceNumber').value = ref;
+
+        window.onload = () => document.getElementById('infoModal').classList.remove('hidden');
+        document.getElementById('closeInfoBtn').onclick = () => document.getElementById('infoModal').classList.add('hidden');
+        
+        document.getElementById('shippingForm').onsubmit = (e) => {
+            e.preventDefault();
+            const g = (id) => document.getElementById(id).value.trim();
+            const msg = `SOLICITUD DE ENVÍO\n\n` +
+                        `Número de Referencia: ${g('referenceNumber')}\n` +
+                        `Nombre: ${g('fullName')}\n` +
+                        `Dirección: ${g('street')} #${g('number')}\n` +
+                        `C. Postal: ${g('zipCode')}\n` +
+                        `Colonia: ${g('neighborhood')}\n` +
+                        `Ciudad: ${g('city')}\n` +
+                        `Estado: ${g('state')}\n` +
+                        `Celular: ${g('phone')}\n` +
+                        `Referencias: ${g('references')}\n` +
+                        `Ubicación: ${g('googleMaps')}`;
+            
+            window.open("https://wa.me/523318297670?text=" + encodeURIComponent(msg), '_blank');
+        };
+    </script>
+</body>
+</html>
